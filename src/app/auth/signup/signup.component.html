@@ -21,6 +21,10 @@
 
   <div *ngIf="showOverallErrors()" class="ui red basic label">
     <p *ngIf="authForm.errors?.passwordsDontMatch">Password doesn't match</p>
+    <p *ngIf="authForm.errors?.noConnection">
+      Sorry, internet connection couldnt be established
+    </p>
+    <p *ngIf="authForm.errors?.unknownErrors">Uh oh, something went wrong</p>
   </div>
 
   <div><button class="ui submit button primary">Submit</button></div>
