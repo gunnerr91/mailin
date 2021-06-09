@@ -17,6 +17,10 @@ interface SignupResponse {
   username: string;
 }
 
+interface CheckAuthResponse {
+  signedin: boolean;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -34,7 +38,7 @@ export class AuthService {
       }
     );
   }
-  //https://api.angular-email.com/
+
   signup(credentials: SignupCredentials) {
     return this.client
       .post<SignupResponse>(`${this.rootUrl}/auth/signup`, credentials)
@@ -43,5 +47,11 @@ export class AuthService {
           this.signedin.next(true);
         })
       );
+  }
+
+  checkAuth() {
+    return this.client
+      .get<CheckAuthResponse>(`${this.rootUrl}/auth/signedin`)
+      .pipe(tap((response) => console.log(response)));
   }
 }
